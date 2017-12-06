@@ -34,15 +34,13 @@ public class CarWorkshop {
 			"***************************\n"
 		);
 
-		
+		// On récupère les données du fichier
 		try {
-			// Récupération du fichier
 			Path path = Paths.get(fileName);
 		    
-			// Si le fichier existe, nous récupérons le contenu
+			// Si le fichier existe
 			if ( Files.exists(path) ) {
 				
-				// Instantiation des objet de lecture du fichier
 				file = new File(fileName);
 				fis = new FileInputStream(file);
 				inputStreamReader = new InputStreamReader(fis, "UTF-8" );
@@ -74,7 +72,7 @@ public class CarWorkshop {
 			} else {
 				// Si le fichier n'exsite pas on le crée
 				PrintWriter writer = new PrintWriter( fileName, "UTF-8" );
-				System.out.println("Le fichier \"" + fileName + "\" n'existe pas ! \n Il vient donc d'être crée. ");
+				System.out.println("Le fichier \"" + fileName + "\" n'existe pas ! ");
 				
 				// Fermeture du PrintWriter
 				writer.close();
@@ -105,7 +103,7 @@ public class CarWorkshop {
 			}
 		} // FIN TRY CATCH FINALY	
 		
-		return str;
+		return str; 
 	} // Fin méthode toString
 	
 	
@@ -121,7 +119,6 @@ public class CarWorkshop {
 
 
 	
-	// Getter permet de récupérer la liste des véhicule en dehors de la classe
 	public List<Vehicle> getVehicleList() {
 		return vehicleList;
 	}
