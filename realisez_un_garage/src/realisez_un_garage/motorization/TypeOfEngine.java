@@ -1,4 +1,4 @@
-package realisez_un_garage;
+package realisez_un_garage.motorization;
 
 public enum TypeOfEngine {
 	DIESEL,
