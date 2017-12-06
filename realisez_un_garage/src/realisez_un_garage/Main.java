@@ -79,9 +79,9 @@ public class Main {
 	}
 
 	/**
-	 * Methode permettant la sauguarde du garage
+	 * Methode permettant de sauveguarder le garage
 	 * Lit et écrit dans un fichier
-	 * @param carWorkshop
+	 * @param carWorkshop permet de récupérer la liste des véhicules
 	 */
 	public static void writeTheVehiculeListToTheFile( CarWorkshop carWorkshop ) {
 		BufferedOutputStream bufferedOutputStream = null;
@@ -107,6 +107,7 @@ public class Main {
 				writer.close();
 			}
 			
+			// Instanciation des objets permettant la lecture et l'écriture du fichier
 			String txtFileContents = new String();
 			file = new File(fileName);
 			// Initialisation des objet de lecture
@@ -115,19 +116,20 @@ public class Main {
 			bufferedReader = new BufferedReader(inputStreamReader);
 			String lineFile;
 
-			// Nous récupérons les lignes du fichier
+			// On boucle sur les lignes du fichier
 			while( (lineFile = bufferedReader.readLine()) != null) {
 				
-				// On ajoute la ligne parcourue dans la varrable
+				// On ajoute la ligne parcourue dans la varrable de contenue du fichier
 				txtFileContents += lineFile + "\n";
 			}
 			
+			// Récupération de la liste des nouveaux véhicule
 			List<Vehicle> vehicleList = carWorkshop.getVehicleList();
 			
 			// On boucle sur la liste de véhicule à ajouter dans le fichier
 			for ( int numberVehicule = 0; numberVehicule < vehicleList.size(); numberVehicule++) {
 				
-				// On ajoute les nouvelles voitures dans la variable de contenue du fichier
+				// On ajoute le véhicule dans la varriable qui contient toutes la liste des véhicule
 				txtFileContents += vehicleList.get(numberVehicule).toString();
 			}
 			
@@ -138,7 +140,7 @@ public class Main {
 			// On écrit dans le fichier la liste des véhicules (déjas présent ainsi que les nouveaux véhicule)
 			fileOutputStream.write( txtFileContents.getBytes(StandardCharsets.UTF_8) );
 			
-			// Fermeture du buffer et des fileInputStream/fileOututStream l'outputStream
+			// Fermeture des objets de lécture/écriture
 			fileInputStream.close();
 			inputStreamReader.close();
 			bufferedReader.close();
@@ -176,5 +178,5 @@ public class Main {
 	            e.printStackTrace();
 			}
 		} // FIN TRY CATCH FINALY
-	}
+	} // Fin methode writeTheVehiculeListToTheFile
 }
