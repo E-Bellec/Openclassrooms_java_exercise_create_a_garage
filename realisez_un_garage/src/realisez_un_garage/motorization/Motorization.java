@@ -18,6 +18,7 @@ public class Motorization {
 		return str;
 	}
 	
+	// Getter permet de récupérer le prix en dehors de la classe
 	public Double getPrice(){
 		return this.price;
 	}

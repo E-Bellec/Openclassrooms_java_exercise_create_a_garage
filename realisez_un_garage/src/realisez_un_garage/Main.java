@@ -79,9 +79,9 @@ public class Main {
 	}
 
 	/**
-	 * Methode permettant la sauguarde du garage
+	 * Methode permettant de sauguarder le garage
 	 * Lit et écrit dans un fichier
-	 * @param carWorkshop
+	 * @param carWorkshop permet de récupérer la liste des véhicules
 	 */
 	public static void writeTheVehiculeListToTheFile( CarWorkshop carWorkshop ) {
 		BufferedOutputStream bufferedOutputStream = null;
@@ -90,9 +90,11 @@ public class Main {
 		FileInputStream fileInputStream = null;
 		InputStreamReader inputStreamReader = null;
 		File file = null;
+		String txtFileContents = new String();
 		final String fileName = "vehicleList.txt";
-
-		// On récupère les données du fichier
+		List<Vehicle> vehicleList = carWorkshop.getVehicleList();
+		
+		// Bloc try pour gérer les exception de lecture et d'écriture du fichier
 		try {
 			Path path = Paths.get(fileName);
 			
@@ -107,38 +109,33 @@ public class Main {
 				writer.close();
 			}
 			
-			String txtFileContents = new String();
+			// Instanciation des objets permettant la lecture et l'écriture du fichier
 			file = new File(fileName);
-			// Initialisation des objet de lecture
 			fileInputStream = new FileInputStream(file);
 			inputStreamReader = new InputStreamReader(fileInputStream, "UTF8");
 			bufferedReader = new BufferedReader(inputStreamReader);
+			fileOutputStream = new FileOutputStream(file);
+			bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
 			String lineFile;
 
-			// Nous récupérons les lignes du fichier
+			// On boucle sur les lignes du fichier
 			while( (lineFile = bufferedReader.readLine()) != null) {
 				
-				// On ajoute la ligne parcourue dans la varrable
+				// On ajoute la ligne parcourue dans la varrable de contenue du fichier
 				txtFileContents += lineFile + "\n";
 			}
 			
-			List<Vehicle> vehicleList = carWorkshop.getVehicleList();
-			
-			// On boucle sur la liste de véhicule à ajouter dans le fichier
+			// On boucle sur la liste des nouveau véhicules à ajouter dans le fichier
 			for ( int numberVehicule = 0; numberVehicule < vehicleList.size(); numberVehicule++) {
 				
-				// On ajoute les nouvelles voitures dans la variable de contenue du fichier
+				// On ajoute le véhicule dans la varriable qui contient toutes la liste des véhicule
 				txtFileContents += vehicleList.get(numberVehicule).toString();
 			}
-			
-			// Initialisation des objet d'écriture
-			fileOutputStream = new FileOutputStream(file);
-			bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
 		
 			// On écrit dans le fichier la liste des véhicules (déjas présent ainsi que les nouveaux véhicule)
 			fileOutputStream.write( txtFileContents.getBytes(StandardCharsets.UTF_8) );
 			
-			// Fermeture du buffer et des fileInputStream/fileOututStream l'outputStream
+			// Fermeture des objets de lécture/écriture
 			fileInputStream.close();
 			inputStreamReader.close();
 			bufferedReader.close();
@@ -176,5 +173,5 @@ public class Main {
 	            e.printStackTrace();
 			}
 		} // FIN TRY CATCH FINALY
-	}
+	} // Fin methode writeTheVehiculeListToTheFile
 }

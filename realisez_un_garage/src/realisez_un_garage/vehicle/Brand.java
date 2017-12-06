@@ -1,4 +1,4 @@
-package realisez_un_garage;
+package realisez_un_garage.vehicle;
 
 public enum Brand {
 	RENO,

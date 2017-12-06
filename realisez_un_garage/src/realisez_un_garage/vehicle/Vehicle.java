@@ -3,7 +3,6 @@ package realisez_un_garage.vehicle;
 import java.util.ArrayList;
 import java.util.List;
 
-import realisez_un_garage.Brand;
 import realisez_un_garage.motorization.Motorization;
 import realisez_un_garage.option.Option;
 
